@@ -1,6 +1,13 @@
 .App {
   text-align: center;
 }
+.jumbotron {
+  padding: 2rem 1rem;
+  margin-bottom: 2rem;
+  background-image: url("./background.jpg");
+  background-size: cover;
+  border-radius: 0.3rem;
+}
 
 .App-logo {
   height: 40vmin;
