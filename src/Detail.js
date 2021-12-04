@@ -1,4 +1,4 @@
-import react, { useState } from "react"
+import react, { useEffect, useState } from "react"
 import { useHistory, useParams } from "react-router-dom"
 import styled from "styled-components"
 
@@ -11,6 +11,13 @@ let 제목 = styled.div`
 `
 
 function Detail(props) {
+  useEffect(() => {
+    // let 타이머 =setTimeout(() => {
+    //   // alert 창을 안보이게 해주셈
+    // }, 2000)
+    // return function 어쩌구() { 실행할 코드~ }
+  })
+
   let { id } = useParams()
   let history = useHistory()
 
@@ -21,8 +28,12 @@ function Detail(props) {
   return (
     <div className="container">
       <박스>
-        <제목 색상={"blue"}>Detail</제목>
+        <제목 색상={"red"}>Detail</제목>
       </박스>
+      <div className="my-arlet2">
+        {" "}
+        <p> 재고가 얼마 남지 않았습니다.</p>
+      </div>
       <div className="row">
         <div className="col-md-6">
           <img
