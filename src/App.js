@@ -5,6 +5,7 @@ import { Navbar, Container, Nav } from "react-bootstrap"
 import Data from "./data.js"
 import { Link, Route, Switch } from "react-router-dom"
 import Detail from "./Detail"
+import axios from "axios"
 
 function App() {
   let [shoes, shoes변경] = useState(Data)
@@ -42,6 +43,22 @@ function App() {
                 return <Card shoes={shoes[i]} i={i} key={i} />
               })}
             </div>
+            <button
+              className="btn btn-primary"
+              onClick={() => {
+                axios
+                  .get("https://codingapple1.github.io/shop/data2.json")
+                  .then(result => {
+                    console.log(result.data)
+                    shoes변경([...shoes, ...result.data])
+                  })
+                  .catch(() => {
+                    console.log("실패")
+                  })
+              }}
+            >
+              더보기
+            </button>
           </div>
         </Route>
         <Route path="/detail/:id">

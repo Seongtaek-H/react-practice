@@ -7,20 +7,23 @@ let 박스 = styled.div`
 `
 let 제목 = styled.div`
   font-size: 25px;
-  color: ${(props) => props.색상};
+  color: ${props => props.색상};
 `
 
 function Detail(props) {
   useEffect(() => {
-    // let 타이머 =setTimeout(() => {
-    //   // alert 창을 안보이게 해주셈
-    // }, 2000)
-    // return function 어쩌구() { 실행할 코드~ }
-  })
+    let 타이머 = setTimeout(() => {
+      alert변경(false)
+    }, 2000)
+    return () => {
+      clearTimeout(타이머)
+    }
+  }, [])
 
+  let [alert, alert변경] = useState(true)
+  let [inputData, inputData변경] = useState("")
   let { id } = useParams()
   let history = useHistory()
-
   let 찾은상품 = props.shoes.find(function (상품) {
     return 상품.id == id
   })
@@ -30,10 +33,19 @@ function Detail(props) {
       <박스>
         <제목 색상={"red"}>Detail</제목>
       </박스>
-      <div className="my-arlet2">
-        {" "}
-        <p> 재고가 얼마 남지 않았습니다.</p>
-      </div>
+      {alert === true ? (
+        <div className="my-arlet2">
+          {" "}
+          <p> 재고가 얼마 남지 않았습니다.</p>
+        </div>
+      ) : null}
+      {inputData}
+      <input
+        onChange={e => {
+          inputData변경(e.target.value)
+        }}
+      />
+
       <div className="row">
         <div className="col-md-6">
           <img
