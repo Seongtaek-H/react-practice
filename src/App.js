@@ -1,14 +1,15 @@
-import react, { useState } from "react"
-import logo from "./logo.svg"
-import "./App.css"
-import { Navbar, Container, Nav } from "react-bootstrap"
-import Data from "./data.js"
-import { Link, Route, Switch } from "react-router-dom"
-import Detail from "./Detail"
-import axios from "axios"
+import react, { useState } from "react";
+import logo from "./logo.svg";
+import "./App.css";
+import { Navbar, Container, Nav } from "react-bootstrap";
+import Data from "./data.js";
+import { Link, Route, Switch } from "react-router-dom";
+import Detail from "./Detail";
+import axios from "axios";
 
 function App() {
-  let [shoes, shoes변경] = useState(Data)
+  let [shoes, shoes변경] = useState(Data);
+  let [재고, 재고변경] = useState([10, 11, 12]);
 
   return (
     <div className="App">
@@ -40,7 +41,7 @@ function App() {
           <div className="container">
             <div className="row">
               {shoes.map((a, i) => {
-                return <Card shoes={shoes[i]} i={i} key={i} />
+                return <Card shoes={shoes[i]} i={i} key={i} />;
               })}
             </div>
             <button
@@ -49,12 +50,12 @@ function App() {
                 axios
                   .get("https://codingapple1.github.io/shop/data2.json")
                   .then(result => {
-                    console.log(result.data)
-                    shoes변경([...shoes, ...result.data])
+                    console.log(result.data);
+                    shoes변경([...shoes, ...result.data]);
                   })
                   .catch(() => {
-                    console.log("실패")
-                  })
+                    console.log("실패");
+                  });
               }}
             >
               더보기
@@ -62,14 +63,14 @@ function App() {
           </div>
         </Route>
         <Route path="/detail/:id">
-          <Detail shoes={shoes} />
+          <Detail shoes={shoes} 재고={재고} 재고변경={재고변경} />
         </Route>
         {/* <Route path="/:id">
           <div>아무거나</div>
         </Route> */}
       </Switch>
     </div>
-  )
+  );
 }
 
 function Card(props) {
@@ -87,7 +88,7 @@ function Card(props) {
         {props.shoes.content} & {props.shoes.price}{" "}
       </p>
     </div>
-  )
+  );
 }
 
-export default App
+export default App;

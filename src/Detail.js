@@ -1,32 +1,32 @@
-import react, { useEffect, useState } from "react"
-import { useHistory, useParams } from "react-router-dom"
-import styled from "styled-components"
+import react, { useEffect, useState } from "react";
+import { useHistory, useParams } from "react-router-dom";
+import styled from "styled-components";
 
 let 박스 = styled.div`
   padding: 20px;
-`
+`;
 let 제목 = styled.div`
   font-size: 25px;
   color: ${props => props.색상};
-`
+`;
 
 function Detail(props) {
   useEffect(() => {
     let 타이머 = setTimeout(() => {
-      alert변경(false)
-    }, 2000)
+      alert변경(false);
+    }, 2000);
     return () => {
-      clearTimeout(타이머)
-    }
-  }, [])
+      clearTimeout(타이머);
+    };
+  }, []);
 
-  let [alert, alert변경] = useState(true)
-  let [inputData, inputData변경] = useState("")
-  let { id } = useParams()
-  let history = useHistory()
+  let [alert, alert변경] = useState(true);
+  let [inputData, inputData변경] = useState("");
+  let { id } = useParams();
+  let history = useHistory();
   let 찾은상품 = props.shoes.find(function (상품) {
-    return 상품.id == id
-  })
+    return 상품.id == id;
+  });
 
   return (
     <div className="container">
@@ -42,7 +42,7 @@ function Detail(props) {
       {inputData}
       <input
         onChange={e => {
-          inputData변경(e.target.value)
+          inputData변경(e.target.value);
         }}
       />
 
@@ -57,11 +57,20 @@ function Detail(props) {
           <h4 className="pt-5">{찾은상품.title}</h4>
           <p>{찾은상품.content}</p>
           <p>{찾은상품.price}원</p>
-          <button className="btn btn-danger">주문하기</button>
+
+          <Info 재고={props.재고}></Info>
           <button
             className="btn btn-danger"
             onClick={() => {
-              history.goBack()
+              props.재고변경([9, 11, 12]);
+            }}
+          >
+            주문하기
+          </button>
+          <button
+            className="btn btn-danger"
+            onClick={() => {
+              history.goBack();
             }}
           >
             뒤로가기
@@ -69,7 +78,11 @@ function Detail(props) {
         </div>
       </div>
     </div>
-  )
+  );
 }
 
-export default Detail
+function Info(props) {
+  return <p>재고:{props.재고}</p>;
+}
+
+export default Detail;
