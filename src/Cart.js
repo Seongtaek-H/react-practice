@@ -42,13 +42,26 @@ function Cart(props) {
           })}
         </tbody>
       </Table>
+      {props.alert열렸나 === true ? (
+        <div className="my-alert2">
+          <p>지금 구매하시면 신규할인 20%</p>
+          <button
+            onClick={() => {
+              props.dispatch({ type: "alert안보이기" })
+            }}
+          >
+            닫기
+          </button>
+        </div>
+      ) : null}
     </div>
   )
 }
 
 function state를props화(파라미터아무거나) {
   return {
-    상품: 파라미터아무거나,
+    상품: 파라미터아무거나.reducer,
+    alert열렸나: 파라미터아무거나.reducer2,
   }
 }
 
