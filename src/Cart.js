@@ -1,8 +1,13 @@
 import React from "react"
 import { Table } from "react-bootstrap"
-import { connect } from "react-redux"
+import { connect, useDispatch, useSelector } from "react-redux"
 
 function Cart(props) {
+  let state = useSelector(state => state)
+  //                        ▲ redux 에 있던 모든 state
+  console.log(state.reducer)
+  let dispatch = useDispatch()
+
   return (
     <div>
       <Table responsive="sm">
@@ -15,23 +20,23 @@ function Cart(props) {
           </tr>
         </thead>
         <tbody>
-          {props.상품.map((맵으로쓸꺼, 갯수보통i쓰더라) => {
+          {state.reducer.map((a, i) => {
             return (
-              <tr key={갯수보통i쓰더라}>
-                <td>{맵으로쓸꺼.id}</td>
-                <td>{맵으로쓸꺼.name}</td>
-                <td>{맵으로쓸꺼.quan}</td>
+              <tr key={i}>
+                <td>{a.id}</td>
+                <td>{a.name}</td>
+                <td>{a.quan}</td>
                 <td>
                   <button
                     onClick={() => {
-                      props.dispatch({ type: "수량증가" })
+                      dispatch({ type: "수량증가", 데이터: a.id })
                     }}
                   >
                     +
                   </button>
                   <button
                     onClick={() => {
-                      props.dispatch({ type: "수량감소" })
+                      dispatch({ type: "수량감소", 데이터: a.id })
                     }}
                   >
                     -
@@ -58,12 +63,12 @@ function Cart(props) {
   )
 }
 
-function state를props화(파라미터아무거나) {
-  return {
-    상품: 파라미터아무거나.reducer,
-    alert열렸나: 파라미터아무거나.reducer2,
-  }
-}
+// function state를props화(파라미터아무거나) {
+//   return {
+//     상품: 파라미터아무거나.reducer,
+//     alert열렸나: 파라미터아무거나.reducer2,
+//   }
+// }
 
-export default connect(state를props화)(Cart)
-// export default Cart
+// export default connect(state를props화)(Cart)
+export default Cart

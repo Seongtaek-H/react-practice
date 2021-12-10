@@ -3,7 +3,7 @@ import logo from "./logo.svg"
 import "./App.css"
 import { Navbar, Container, Nav } from "react-bootstrap"
 import Data from "./data.js"
-import { Link, Route, Switch } from "react-router-dom"
+import { Link, Route, Switch, useHistory } from "react-router-dom"
 import Detail from "./Detail"
 import axios from "axios"
 import Cart from "./Cart.js"
@@ -85,8 +85,14 @@ function App() {
 
 function Card(props) {
   let 재고 = useContext(재고context)
+  let history = useHistory()
   return (
-    <div className="col-md-4">
+    <div
+      className="col-md-4"
+      onClick={() => {
+        history.push("/detail/" + props.shoes.id)
+      }}
+    >
       <img
         src={
           "https://codingapple1.github.io/shop/shoes" + (props.i + 1) + ".jpg"
